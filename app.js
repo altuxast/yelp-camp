@@ -9,7 +9,8 @@ let express 			= require("express"),
     Campground  		= require("./models/campground"),
     Comment     		= require("./models/comment"),
     User        		= require("./models/user"),
-	seedDB				= require("./seeds");	
+	seedDB				= require("./seeds"),
+	dotenv				= require("dotenv").config();	
 
 let commentRoutes		= require("./routes/comments"),
 	campgroundRoutes	= require("./routes/campgrounds"),
@@ -21,10 +22,16 @@ mongoose.set('useUnifiedTopology', true);
 mongoose.set('useFindAndModify', false);
 
 // mongoose.connect("mongodb://localhost/yelp_camp");
-const URI 	= 'mongodb://localhost/yelp_camp', // nothing on 27016 
-	  OPTS 	= { useNewUrlParser: true };
-mongoose.connect(URI, OPTS, function(err) {
-  if (err) { return console.error('failed');}
+// mongodb+srv://altuxast:<password>@cluster0-nu2cb.mongodb.net/test?retryWrites=true&w=majority
+const 	user 		= process.env.DB_USER,
+		password 	= process.env.DB_PASS;
+
+const URI 	= 'mongodb+srv://' + user + ':' + password + '@cluster0-nu2cb.mongodb.net/test?retryWrites=true&w=majority', // nothing on 27016 
+	  OPTS 	= { useNewUrlParser: true, useCreateIndex: true };
+mongoose.connect(URI, OPTS).then(() => {
+	console.log("Connected to db");
+}).catch(err => {
+	console.log("ERROR:", err.message);
 });
 
 let ejs = require("ejs");
