@@ -37,7 +37,9 @@ const URI 	= 'mongodb+srv://' + user + ':' + password + '@cluster0-nu2cb.mongodb
 // 	console.log("ERROR:", err.message);
 // });
 
-let store = new MongoDBStore({uri: URI, collection: "YCSessions"});
+let store = new MongoDBStore({uri: URI, collection: "YCSessions"}).then(() => {
+	console.log("Connected to db");
+});
 
 // catch errors
 store.on("error", err => {
