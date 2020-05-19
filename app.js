@@ -23,6 +23,7 @@ mongoose.set('useFindAndModify', false);
 
 // mongoose.connect("mongodb://localhost/yelp_camp");
 // mongodb+srv://altuxast:<password>@cluster0-nu2cb.mongodb.net/test?retryWrites=true&w=majority
+// mongodb+srv://altuxast:<password>@cluster0-nu2cb.mongodb.net/test?retryWrites=true&w=majority
 const 	user 		= process.env.DB_USER,
 		password 	= process.env.DB_PASS;
 
