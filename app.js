@@ -1,6 +1,6 @@
 let express 			= require("express"),
 	app 				= express(),
-	// session				= require("express-session"),
+	session				= require("express-session"),
 	MongoDBStore		= require("connect-mongodb-session")(session),
 	bodyParser 			= require("body-parser"),
 	mongoose 			= require("mongoose"),
