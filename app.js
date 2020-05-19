@@ -38,9 +38,9 @@ const URI 	= 'mongodb+srv://' + user + ':' + password + '@cluster0-nu2cb.mongodb
 // });
 
 let store = MongoDBStore({uri: URI, collections: {
-	campgrounds,
-	comments,
-	users
+	campgrounds: "campgrounds",
+	comments: "comments",
+	users: "users"
 }});
 // catch errors
 store.on("error", err => {
