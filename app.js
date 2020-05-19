@@ -1,13 +1,13 @@
 let express 			= require("express"),
 	app 				= express(),
 	session				= require("express-session"),
-	MongoDBStore		= require("connect-mongodb-session")(session),
 	bodyParser 			= require("body-parser"),
 	mongoose 			= require("mongoose"),
 	flash				= require("connect-flash"),
 	passport			= require("passport"),
     LocalStrategy 		= require("passport-local"),
 	methodOverride		= require("method-override"),
+	MongoDBStore		= require("connect-mongodb-session")(session),
     Campground  		= require("./models/campground"),
     Comment     		= require("./models/comment"),
     User        		= require("./models/user"),
@@ -37,7 +37,7 @@ const URI 	= 'mongodb+srv://' + user + ':' + password + '@cluster0-nu2cb.mongodb
 // 	console.log("ERROR:", err.message);
 // });
 
-let store = MongoDBStore({uri: URI, collection: "users"});
+let store = MongoDBStore({uri: URI, collection: "test"});
 
 // catch errors
 store.on("error", err => {
