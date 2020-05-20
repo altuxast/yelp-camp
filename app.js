@@ -1,13 +1,13 @@
 let express 			= require("express"),
 	app 				= express(),
-	session				= require("express-session"),
+	// session				= require("express-session"),
 	bodyParser 			= require("body-parser"),
 	mongoose 			= require("mongoose"),
 	flash				= require("connect-flash"),
 	passport			= require("passport"),
     LocalStrategy 		= require("passport-local"),
 	methodOverride		= require("method-override"),
-	MongoDBStore		= require("connect-mongodb-session")(session),
+	// MongoDBStore		= require("connect-mongodb-session")(session),
     Campground  		= require("./models/campground"),
     Comment     		= require("./models/comment"),
     User        		= require("./models/user"),
@@ -31,20 +31,20 @@ const 	user 		= process.env.DB_USER,
 
 const URI 	= 'mongodb+srv://' + user + ':' + password + '@cluster0-nu2cb.mongodb.net/test?retryWrites=true&w=majority', // nothing on 27016 
 	  OPTS 	= { useNewUrlParser: true, useCreateIndex: true };
-// mongoose.connect(URI, OPTS).then(() => {
+mongoose.connect(URI, OPTS).then(() => {
+	console.log("Connected to db");
+}).catch(err => {
+	console.log("ERROR:", err.message);
+});
+
+// let store = new MongoDBStore({uri: URI, collection: "YCSessions"}, () => {
 // 	console.log("Connected to db");
-// }).catch(err => {
-// 	console.log("ERROR:", err.message);
 // });
 
-let store = new MongoDBStore({uri: URI, collection: "YCSessions"}, () => {
-	console.log("Connected to db");
-});
-
 // catch errors
-store.on("error", err => {
-	console.log(err.message)
-});
+// store.on("error", err => {
+// 	console.log(err.message)
+// });
 
 let ejs = require("ejs");
 
@@ -57,10 +57,10 @@ app.use(flash());
 // Passport Configuration
 app.use(require("express-session")({
 	secret: "Once again Rusty wins cutest dog!",
-	cookie: {
-		maxAge: 1000 * 60 * 60 * 24 * 7 // 1 week
-	},
-	store: store,
+	// cookie: {
+	// 	maxAge: 1000 * 60 * 60 * 24 * 7 // 1 week
+	// },
+	// store: store,
 	resave: false,
 	saveUninitialized: false
 }));
