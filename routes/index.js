@@ -18,6 +18,10 @@ router.get("/register", function(req, res){
 // Handle sign up logic
 router.post("/register", function(req, res){
 	let newUser = new User({username: req.body.username});
+	// eval(require("locus"));
+	if(req.body.adminCode === 'finneganFox'){
+		newUser.isAdmin = true;
+	}
 	User.register(newUser, req.body.password, function(err, user){
 		// if(err){
 		// 	req.flash("error", err.message);

@@ -3,7 +3,8 @@ let mongoose				= require("mongoose"),
 
 let UserSchema	= new mongoose.Schema({
 	username: String,
-	password: String
+	password: String,
+	isAdmin: {type: Boolean, default: false}
 });
 // passportLocalMongoose(local sign methods) now available for user models
 UserSchema.plugin(passportLocalMongoose);
